@@ -1,6 +1,6 @@
 package com.example.fuelmanager
 
-class Car ( var CarName:String)
+class Car ( var carName:String)
 {
 
 }
