@@ -11,11 +11,13 @@
     >
 
     <TextView
-
         android:textColor="@android:color/white"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/Main_Window" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/tx_Main_Window"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btn_new_refuel_layout"

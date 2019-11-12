@@ -9,13 +9,15 @@
     <ListView
         android:id="@+id/listViewShowAllRefuel"
         android:layout_width="match_parent"
-        android:layout_height="613dp"
-        android:cacheColorHint="@android:color/white"></ListView>
+        android:layout_height="242dp"
+        android:cacheColorHint="@android:color/white">
+
+    </ListView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginLeft="50dp">
+        android:layout_marginLeft="2sp">
 
 
         <Button

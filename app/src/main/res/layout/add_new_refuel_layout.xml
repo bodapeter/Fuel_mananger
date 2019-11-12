@@ -24,7 +24,6 @@
         android:layout_marginTop="50dp"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-
         android:id="@+id/edit_Date"
         android:hint="@string/et_date"
         android:inputType="text"

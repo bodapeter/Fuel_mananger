@@ -1,10 +1,10 @@
 <resources>
-    <string name="Main_Window">Main slide</string>
+    <string name="tx_Main_Window">Refuel manager main menu</string>
     <string name="btn_new_refuel">New Refuel</string>
     <string name="btn_add">ADD</string>
     <string name="btn_update">UPDATE</string>
     <string name="btn_delete">DELETE</string>
-    <string name="btn_backtoMain">Back to main slide</string>
+    <string name="btn_backtoMain">Back to the main menu</string>
     <string name="btn_showall">Show All</string>
 
     <string name="et_date">DATETIME</string>

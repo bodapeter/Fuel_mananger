@@ -20,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     var databaseHandler : DBHelper = DBHelper(this,null)
 
+    var datalist:List<Refuel> = databaseHandler.getRefuels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

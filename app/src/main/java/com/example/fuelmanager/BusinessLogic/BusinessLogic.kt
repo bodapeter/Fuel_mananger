@@ -2,21 +2,16 @@ package com.example.fuelmanager.BusinessLogic
 
 import com.example.fuelmanager.Model.Refuel
 import java.math.RoundingMode
-
+import com.example.fuelmanager.DataBaseHelper.DBHelper
 
 class BusinessLogic {
 
+   lateinit var allRefuels: List<Refuel>
 
-
-    var allRefuels = mutableListOf<Refuel>()
-
-    //add to new refuel in list
-    fun AddNewRefuel(refuel: Refuel)
+    fun loadREfuelsInMain(getRefuels:List<Refuel>)
     {
-        allRefuels.add(refuel)
+        allRefuels =  getRefuels
     }
-
-
 
 
     //fogyasztás kiszámítása
