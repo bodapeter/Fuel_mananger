@@ -10,8 +10,10 @@ import android.opengl.Visibility
 
 import android.view.View
 import android.widget.*
+import com.example.fuelmanager.Adapter.RefuelAdapter
 import com.example.fuelmanager.Model.Refuel
 import kotlinx.android.synthetic.main.add_new_refuel_layout.*
+import kotlinx.android.synthetic.main.show_all_layout.*
 import java.lang.Exception
 
 import java.time.LocalDateTime
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     var databaseHandler : DBHelper = DBHelper(this,null)
 
-    var lstRefuel:List<Refuel>  = ArrayList<Refuel>()
+    var lstRefuel:List<Refuel> = databaseHandler.getRefuels()
 
 
 
@@ -43,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             addNewRefuel()
             findViewById<View>(R.id.addNewRefuelLayout).visibility = View.INVISIBLE
             findViewById<View>(R.id.showAllRefuel).visibility = View.VISIBLE
-
         }
 
         //delete button
@@ -77,14 +78,14 @@ class MainActivity : AppCompatActivity() {
             skipTheAddNewRefuelLayout()
         }
 
-       /* //drop button
-        val dropDB:Button = findViewById(R.id.btn_deldatabase)
+        //drop button
+        /*val dropDB:Button = findViewById(R.id.btn_deldatabase)
         dropDB.setOnClickListener()
         {
             dropTable()
-        }
+        }*/
 
-*/
+
         val createDB:Button = findViewById(R.id.btn_createdb)
         createDB.setOnClickListener()
         {
@@ -117,8 +118,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-        val adapter = Adapter(this@MainActivity,datalist,edit_Date,edit_KilometerClock,edit_KilometersBetweenFillIngUpFuelTank,edit_fuelQuantity,edit_fuelprice)
 
+        val adapter = RefuelAdapter(this@MainActivity,lstRefuel,edit_Date,edit_KilometerClock,edit_KilometersBetweenFillIngUpFuelTank,edit_fuelQuantity,edit_fuelprice)
+        listViewShowAllRefuel.adapter = adapter
     }
 
     fun addNewRefuel()

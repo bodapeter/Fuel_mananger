@@ -7,6 +7,7 @@
   >
 
     <ListView
+        android:choiceMode="singleChoice"
         android:id="@+id/listViewShowAllRefuel"
         android:layout_width="match_parent"
         android:layout_height="242dp"

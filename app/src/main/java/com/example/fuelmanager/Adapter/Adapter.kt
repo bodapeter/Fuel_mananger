@@ -12,7 +12,7 @@ import com.example.fuelmanager.R
 import kotlinx.android.synthetic.main.row_layout.view.*
 
 
-class Adapter(internal var activity:Activity,
+class RefuelAdapter(internal var activity:Activity,
               internal  var lstRefuel:List<Refuel>,
               internal var dateForRefuelling:EditText,
               internal var kiloMeter:EditText,
