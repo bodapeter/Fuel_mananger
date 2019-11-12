@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/txt_row_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
         android:text="0"
         android:textSize="40dp"
-        android:layout_marginLeft="10sp"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -11,7 +11,7 @@
     <string name="et_kilometers">KILOMETERS IN CAR</string>
     <string name="et_2refuels">KILOMETERS BETWEEN FILLING UP FUEL TANK</string>
     <string name="et_fuelQuanytity">FUEL QUANTITY</string>
-    <string name="et_price">RICE OF THE FUEL</string>
+    <string name="et_price">PRICE OF THE FUEL</string>
 
     <string name="tx_adtress">REFUEL MANAGER</string>
 
