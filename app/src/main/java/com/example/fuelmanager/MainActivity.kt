@@ -11,6 +11,7 @@ import android.opengl.Visibility
 import android.view.View
 import android.widget.*
 import com.example.fuelmanager.Model.Refuel
+import kotlinx.android.synthetic.main.add_new_refuel_layout.*
 import java.lang.Exception
 
 import java.time.LocalDateTime
@@ -20,12 +21,15 @@ class MainActivity : AppCompatActivity() {
 
     var databaseHandler : DBHelper = DBHelper(this,null)
 
-    var datalist:List<Refuel> = databaseHandler.getRefuels()
+    var lstRefuel:List<Refuel>  = ArrayList<Refuel>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        refreshData()
 
 
         //first visitibility
@@ -109,6 +113,11 @@ class MainActivity : AppCompatActivity() {
             findViewById<View>(R.id.addNewRefuelLayout).visibility = View.VISIBLE
             findViewById<View>(R.id.mainLayout).visibility = View.INVISIBLE
         }*/
+
+    }
+
+    private fun refreshData() {
+        val adapter = Adapter(this@MainActivity,datalist,edit_Date,edit_KilometerClock,edit_KilometersBetweenFillIngUpFuelTank,edit_fuelQuantity,edit_fuelprice)
 
     }
 

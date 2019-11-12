@@ -14,13 +14,15 @@ import kotlinx.android.synthetic.main.row_layout.view.*
 
 class Adapter(internal var activity:Activity,
               internal  var lstRefuel:List<Refuel>,
-              internal var edit_date:EditText,
               internal var dateForRefuelling:EditText,
               internal var kiloMeter:EditText,
               internal var kilometerbetweenRefuel:EditText,
               internal var fuelQuantity:EditText,
               internal var priceOfRefuel:EditText
               ):BaseAdapter() {
+
+
+
 
     internal var inflater:LayoutInflater
 
@@ -52,18 +54,12 @@ class Adapter(internal var activity:Activity,
         rowView.txt_row_sum_fuel_quantity.text = lstRefuel[position].fuelQuantity.toString()
 
         rowView.setOnClickListener {
-            edit_date.setText(rowView.txt_row_date_now.text.toString())
+            dateForRefuelling.setText(rowView.txt_row_date_now.text.toString())
             kiloMeter.setText(rowView.txt_row_sum_kilometers.text.toString())
             priceOfRefuel.setText(rowView.txt_row_sum_fuel_price.text.toString())
             fuelQuantity.setText(rowView.txt_row_sum_fuel_quantity.text.toString())
 
         }
         return rowView
-    }
-
-    private inner class ViewHolder {
-
-        var tvname: TextView? = null
-        var tvcountry: TextView? = null
     }
 }
