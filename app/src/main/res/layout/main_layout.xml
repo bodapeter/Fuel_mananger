@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@android:color/holo_blue_dark"
+    android:id="@+id/main_Layout"
+    >
+
+    <TextView
+
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/Main_Window" />
+
+    <Button
+        android:id="@+id/btn_new_refuel_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:text="@string/btn_new_refuel"
+        android:textSize="30sp"
+        android:layout_margin="50dp"
+        />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <Button
+        android:id="@+id/btn_deldatabase"
+        android:text="Del database"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_createdb"
+        android:text="create database"
+        android:layout_marginTop="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btn_showAll"
+        android:layout_marginTop="200dp"
+        android:text="@string/btn_showall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</FrameLayout>
