@@ -18,6 +18,9 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
+import android.os.Build.ID
+import java.sql.Ref
+
 
 class DBHelper(context: Context,
                factory: SQLiteDatabase.CursorFactory?):
@@ -82,39 +85,65 @@ class DBHelper(context: Context,
         db.close()
     }
 
+   fun getAllRefuel():List<Refuel> {
 
+
+       var refuelsList = mutableListOf<Refuel>()
+        val db = writableDatabase
+        val selectQuery = "SELECT * FROM $TABLE_NAME"
+        val cursor = db.rawQuery(selectQuery, null)
+        if (cursor != null) {
+
+            while (cursor.moveToNext()) {
+
+                var refuel:Refuel = Refuel("",0.0,0.0,0.0,0.0)
+
+
+                    refuel.Id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(REFUELID)))
+                    refuel.dateForRefuelling = cursor.getString(cursor.getColumnIndex(DATETIME))
+                    refuel.kiloMeter = cursor.getDouble(cursor.getColumnIndex(KILOMETER))
+                    refuel.kilometerbetweenRefuel = cursor.getDouble(
+                        cursor.getColumnIndex(
+                            KILOMETERBETWEENREFUEL))
+                    refuel.fuelQuantity = cursor.getDouble(cursor.getColumnIndex(FUELQUANTITIY))
+                    refuel.priceOfRefuel = cursor.getDouble(cursor.getColumnIndex(PRICEOFREFUEL))
+
+                    refuelsList.add(refuel)
+            }
+        }
+        return refuelsList
+    }
 
     //CRUD
 
     //READ
-   val allRefuels:List<Refuel>
+   fun getRefuel(_id: Int):Refuel
 
-    get(){
-
-        var refuels = ArrayList<Refuel>()
+    {
+        val refuel:Refuel = Refuel("",0.0,0.0,0.0,0.0)
         val db= this.writableDatabase
-        val SELECT_QUERY ="SELECT * FROM $TABLE_NAME"
+        val SELECT_QUERY ="SELECT * FROM $TABLE_NAME WHERE $ID = _id"
         val cursor = db.rawQuery(SELECT_QUERY,null)
         if(cursor != null)
         {
+            cursor.moveToFirst()
 
             while(cursor.moveToNext())
             {
-                var refuel=Refuel("",null,null,null,null)
-                refuel.Id = (cursor.getString(cursor.getColumnIndex(REFUELID)))
+
+                refuel.Id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(REFUELID)))
                 refuel.dateForRefuelling = cursor.getString( cursor.getColumnIndex(DATETIME))
                 refuel.kiloMeter = cursor.getDouble(cursor.getColumnIndex(KILOMETER))
                 refuel.kilometerbetweenRefuel = cursor.getDouble(
                     cursor.getColumnIndex(
                         KILOMETERBETWEENREFUEL))
                 refuel.fuelQuantity = cursor.getDouble(cursor.getColumnIndex(FUELQUANTITIY))
-                refuel.priceOfRefuel = cursor.getInt(cursor.getColumnIndex(PRICEOFREFUEL))
+                refuel.priceOfRefuel = cursor.getDouble(cursor.getColumnIndex(PRICEOFREFUEL))
 
-                refuels.add(refuel)
             }
         }
         db.close()
-        return refuels
+        return refuel
     }
 
     //CREATE
@@ -135,7 +164,7 @@ class DBHelper(context: Context,
     }
 
     //UPDATE
-    fun updateRefuel(refuel:Refuel): Int {
+    fun updateRefuel(refuel:Refuel): Boolean {
         val db = this.writableDatabase
 
         // Creating content values
@@ -146,11 +175,10 @@ class DBHelper(context: Context,
         values.put(FUELQUANTITIY, refuel.fuelQuantity)
         values.put(PRICEOFREFUEL,refuel.priceOfRefuel )
 
+        val _success = db.update(TABLE_NAME, values, "$REFUELID=?", arrayOf(refuel.getID().toString()))
+        db.close()
+        return (Integer.parseInt("$_success") != -1)
 
-        return db.update(
-            TABLE_NAME, values, "$REFUELID = ?",
-            arrayOf(refuel.Id.toString())
-        )
     }
 
     //DELETE
@@ -161,44 +189,6 @@ class DBHelper(context: Context,
         db.close()
 
     }
-
-
-
-    fun getRefuel(_id: Int): Refuel {
-        var refuel = Refuel("", null, null, null, null)
-        val db = writableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME"
-        val cursor = db.rawQuery(selectQuery, null)
-        if (cursor != null) {
-            cursor.moveToFirst()
-            while (cursor.moveToNext()) {
-                var id: Int = Integer.parseInt(cursor.getString(cursor.getColumnIndex("ID")))
-                if (id == _id) {
-
-                    refuel.Id = (cursor.getString(cursor.getColumnIndex("ID")))
-                    refuel.dateForRefuelling = cursor.getString(cursor.getColumnIndex(DATETIME))
-                    refuel.kiloMeter = cursor.getDouble(cursor.getColumnIndex(KILOMETER))
-                    refuel.kilometerbetweenRefuel = cursor.getDouble(
-                        cursor.getColumnIndex(
-                            KILOMETERBETWEENREFUEL))
-                    refuel.fuelQuantity = cursor.getDouble(cursor.getColumnIndex(FUELQUANTITIY))
-                    refuel.priceOfRefuel = cursor.getInt(cursor.getColumnIndex(PRICEOFREFUEL))
-                }
-
-            }
-        }
-        cursor.close()
-        return refuel
-    }
-
-
-
-
-
-
-
-
-
 }
 
 class Column(var name:String,var type:String)

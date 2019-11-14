@@ -4,7 +4,7 @@ import com.example.fuelmanager.Model.Refuel
 import java.math.RoundingMode
 import com.example.fuelmanager.DataBaseHelper.DBHelper
 
-class BusinessLogic {
+/*class BusinessLogic {
 
    lateinit var allRefuels: List<Refuel>
 
@@ -32,7 +32,7 @@ class BusinessLogic {
 
         for (refuel in allRefuels)
         {
-            sum += refuel.priceOfRefuel!!
+            sum += refuel.priceOfRefuel
         }
         return sum
     }
@@ -79,4 +79,4 @@ class BusinessLogic {
         }
         return refuels
     }*/
-}
+}*/

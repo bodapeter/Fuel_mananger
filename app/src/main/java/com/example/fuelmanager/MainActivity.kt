@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-       lstRefuel=databaseHandler.allRefuels
+       lstRefuel=databaseHandler.getAllRefuel()
 
 
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 edit_KilometerClock.text.toString().toDouble(),
                 Integer.parseInt(edit_KilometersBetweenFillIngUpFuelTank.text.toString()).toDouble(),
                 Integer.parseInt(edit_fuelQuantity.text.toString()).toDouble(),
-                Integer.parseInt(edit_fuelprice.text.toString())
+                Integer.parseInt(edit_fuelprice.text.toString()).toDouble()
             )
             databaseHandler.addRefuel(refuel)
 
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         val showAllRefuelButton:Button = findViewById(R.id.btn_showAll)
         showAllRefuelButton.setOnClickListener()
         {
-            val refuels = databaseHandler.allRefuels
+            val refuels = databaseHandler.getAllRefuel()
             val allRefuelListView:ListView = findViewById(R.id.listViewShowAllRefuel)
             allRefuelListView.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,refuels)
             findViewById<View>(R.id.mainLayout).visibility = View.INVISIBLE

@@ -27,8 +27,9 @@
             android:layout_weight="1"
             android:text="Date" />
 
+
         <TextView
-            android:id="@+id/txt_row_sum_kilometers"
+            android:id="@+id/txt_row_kilometers"
             android:inputType="number"
             android:text="0"
             android:layout_marginLeft="10sp"
@@ -37,7 +38,7 @@
             android:layout_height="match_parent"/>
 
         <TextView
-            android:id="@+id/txt_row_sum_fuel_quantity"
+            android:id="@+id/txt_row_between2refuel"
             android:inputType="number"
             android:text="0"
             android:layout_marginLeft="10sp"
@@ -46,7 +47,16 @@
             android:layout_height="match_parent"/>
 
         <TextView
-            android:id="@+id/txt_row_sum_fuel_price"
+            android:id="@+id/txt_row_fuel_quantity"
+            android:inputType="number"
+            android:text="0"
+            android:layout_marginLeft="10sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:id="@+id/txt_price_of_refuel"
             android:inputType="number"
             android:text="0"
             android:layout_marginLeft="10sp"
