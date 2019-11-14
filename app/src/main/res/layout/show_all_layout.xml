@@ -10,13 +10,13 @@
         android:textColorHint="@android:color/white"
         android:hint="@string/et_date"
         android:inputType="text"
-        android:id="@+id/edit_data_row"
+        android:id="@+id/showlayout_edit_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
 
-        android:id="@+id/edit_row_KilometerClock"
+        android:id="@+id/showlayout_edit_kilometer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_kilometers"
@@ -27,7 +27,7 @@
 
     <EditText
 
-        android:id="@+id/edit_row_between2refuel"
+        android:id="@+id/showlayout_edit_2refuel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_2refuels"
@@ -37,7 +37,7 @@
 
     <EditText
 
-        android:id="@+id/edit_row_fuelquantity"
+        android:id="@+id/showlayout_edit_fuelquantity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_fuelQuanytity"
@@ -48,7 +48,7 @@
 
     <EditText
 
-        android:id="@+id/edit_row_Price"
+        android:id="@+id/showlayout_edit_pricerefuel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/et_price"
