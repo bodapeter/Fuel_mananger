@@ -24,16 +24,32 @@ class DBHelper(context: Context,
     SQLiteOpenHelper(context,DB_NAME,
         factory,DB_VERSION) {
 
+    companion object {
 
+        private val DB_VERSION = 1
+        private val DB_NAME = "Refuel_Database"
 
+        private val TABLE_NAME = "Refuels"
+        private val REFUELID = "Id"
+        private val DATETIME = "dateTime"
+        private val KILOMETER = "kiloMeter"
+        private val KILOMETERBETWEENREFUEL = "kilometerBetweenRefuel"
+        private val FUELQUANTITIY = "fuelQuantity"
+        private val PRICEOFREFUEL = "priceOfRefuel"
 
-    override fun onCreate(db: SQLiteDatabase) {
-        val CREATE_PRODUCTS_TABLE =
-            ("CREATE TABLE Refuels(refuelID INTEGER PRIMARY KEY NOT NULL , dateTime TEXT, kiloMeter INTEGER, " +
-                    "kilometerBetweenRefuel INTEGER, fuelQuantity INTEGER, priceOfRefuel INTEGER)")
-        db.execSQL(CREATE_PRODUCTS_TABLE)
     }
 
+    override fun onCreate(db: SQLiteDatabase) {
+        val CREATE_TABLE = "CREATE TABLE $TABLE_NAME (" +
+                REFUELID + " INTEGER PRIMARY KEY," +
+                DATETIME + " TEXT," +
+                KILOMETER + " INTEGER," +
+                KILOMETERBETWEENREFUEL + " INTEGER," +
+                FUELQUANTITIY + " INTEGER)" +
+                PRICEOFREFUEL + " INTEGER);"
+
+        db.execSQL(CREATE_TABLE)
+    }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         val DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME
@@ -45,9 +61,16 @@ class DBHelper(context: Context,
     fun createTable(name:String)
     {
         var db = this.writableDatabase
-        var tableCreate="CREATE TABLE $name( ID INTEGER PRIMARY KEY, dateTime TEXT , kiloMeter INTEGER, kilometerBetweenRefuel INTEGER, fuelQuantity INTEGER, priceOfRefuel INTEGER )"
-        db.execSQL(tableCreate)
+        val CREATE_TABLE = "CREATE TABLE $TABLE_NAME (" +
+                REFUELID + " INTEGER PRIMARY KEY," +
+                DATETIME + " TEXT," +
+                KILOMETER + " INTEGER," +
+                KILOMETERBETWEENREFUEL + " INTEGER," +
+                FUELQUANTITIY + " INTEGER," +
+                PRICEOFREFUEL + " INTEGER);"
 
+                db.execSQL(CREATE_TABLE)
+        db.close()
     }
 
 
@@ -56,6 +79,7 @@ class DBHelper(context: Context,
         var db = this.writableDatabase
         var tableDrop = "DROP TABLE $name"
         db.execSQL(tableDrop)
+        db.close()
     }
 
 
@@ -63,8 +87,9 @@ class DBHelper(context: Context,
     //CRUD
 
     //READ
-    fun getRefuels():List<Refuel>
-    {
+   val allRefuels:List<Refuel>
+
+    get(){
 
         var refuels = ArrayList<Refuel>()
         val db= this.writableDatabase
@@ -76,7 +101,7 @@ class DBHelper(context: Context,
             while(cursor.moveToNext())
             {
                 var refuel=Refuel("",null,null,null,null)
-                refuel.Id = (cursor.getString(cursor.getColumnIndex("refuelID")))
+                refuel.Id = (cursor.getString(cursor.getColumnIndex(REFUELID)))
                 refuel.dateForRefuelling = cursor.getString( cursor.getColumnIndex(DATETIME))
                 refuel.kiloMeter = cursor.getDouble(cursor.getColumnIndex(KILOMETER))
                 refuel.kilometerbetweenRefuel = cursor.getDouble(
@@ -131,10 +156,6 @@ class DBHelper(context: Context,
     //DELETE
     fun delteRefuel(refuel:Refuel) {
         val db = this.writableDatabase
-
-
-
-
          db.delete(
         TABLE_NAME,"$REFUELID=?", arrayOf(refuel.Id.toString()))
         db.close()
@@ -177,20 +198,7 @@ class DBHelper(context: Context,
 
 
 
-    companion object {
 
-        private val DB_VERSION = 1
-        private val DB_NAME = "Refuel_Database"
-
-        private val TABLE_NAME = "Refuels"
-        private val REFUELID = "Id"
-        private val DATETIME = "dateTime"
-        private val KILOMETER = "kiloMeter"
-        private val KILOMETERBETWEENREFUEL = "kilometerBetweenRefuel"
-        private val FUELQUANTITIY = "fuelQuantity"
-        private val PRICEOFREFUEL = "priceOfRefuel"
-
-    }
 }
 
 class Column(var name:String,var type:String)

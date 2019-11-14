@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/tx_Main_Window"
+        android:text="@string/Main_Window"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -32,19 +32,22 @@
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
     <Button
         android:id="@+id/btn_deldatabase"
-        android:text="Del database"
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:onClick="dropTable"
+        android:text="Del database" />
 
     <Button
         android:id="@+id/btn_createdb"
-        android:text="create database"
-        android:layout_marginTop="150dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:onClick="createTable"
+        android:text="create database" />
 
     <Button
         android:id="@+id/btn_showAll"

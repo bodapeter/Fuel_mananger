@@ -19,19 +19,22 @@ import java.lang.Exception
 import java.time.LocalDateTime
 
 
+
+
 class MainActivity : AppCompatActivity() {
 
     var databaseHandler : DBHelper = DBHelper(this,null)
 
-    var lstRefuel:List<Refuel> = databaseHandler.getRefuels()
+    lateinit var lstRefuel:List<Refuel>
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+       lstRefuel=databaseHandler.allRefuels
 
-        refreshData()
+       refreshData()
 
 
         //first visitibility
@@ -43,6 +46,17 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener()
         {
             addNewRefuel()
+
+            /*val refuel = Refuel(
+                edit_Date.text.toString(),
+                edit_KilometerClock.text.toString().toDouble(),
+                Integer.parseInt(edit_KilometersBetweenFillIngUpFuelTank.text.toString()).toDouble(),
+                Integer.parseInt(edit_fuelQuantity.text.toString()).toDouble(),
+                Integer.parseInt(edit_fuelprice.text.toString())
+            )
+            databaseHandler.addRefuel(refuel)
+            refreshData()*/
+
             findViewById<View>(R.id.addNewRefuelLayout).visibility = View.INVISIBLE
             findViewById<View>(R.id.showAllRefuel).visibility = View.VISIBLE
         }
@@ -57,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         val showAllRefuelButton:Button = findViewById(R.id.btn_showAll)
         showAllRefuelButton.setOnClickListener()
         {
-            val refuels = databaseHandler.getRefuels()
+            val refuels = databaseHandler.allRefuels
             val allRefuelListView:ListView = findViewById(R.id.listViewShowAllRefuel)
             allRefuelListView.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,refuels)
             findViewById<View>(R.id.mainLayout).visibility = View.INVISIBLE
@@ -82,7 +96,7 @@ class MainActivity : AppCompatActivity() {
         /*val dropDB:Button = findViewById(R.id.btn_deldatabase)
         dropDB.setOnClickListener()
         {
-            dropTable()
+            dropTable("Refuels")
         }*/
 
 
@@ -118,8 +132,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshData() {
-
-        val adapter = RefuelAdapter(this@MainActivity,lstRefuel,edit_Date,edit_KilometerClock,edit_KilometersBetweenFillIngUpFuelTank,edit_fuelQuantity,edit_fuelprice)
+        lstRefuel = databaseHandler.allRefuels
+        val adapter = RefuelAdapter(this@MainActivity,lstRefuel,edit_data_row,edit_row_KilometerClock,edit_row_between2refuel,edit_row_fuelquantity,edit_row_fuelquantity)
         listViewShowAllRefuel.adapter = adapter
     }
 
@@ -156,7 +170,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,exp.toString(),Toast.LENGTH_LONG).show()
         }
     }
-
     fun dropTable(view:View)
     {
         databaseHandler.dropTable("Refuels")

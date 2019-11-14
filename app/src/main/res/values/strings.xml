@@ -1,5 +1,5 @@
 <resources>
-    <string name="tx_Main_Window">Refuel manager main menu</string>
+    <string name="Main_Window">Refuel manager</string>
     <string name="btn_new_refuel">New Refuel</string>
     <string name="btn_add">ADD</string>
     <string name="btn_update">UPDATE</string>
