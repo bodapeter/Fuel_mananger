@@ -10,8 +10,10 @@ import android.opengl.Visibility
 
 import android.view.View
 import android.widget.*
+import com.example.fuelmanager.Adapter.RefuelAdapter
 import com.example.fuelmanager.Model.Refuel
 import kotlinx.android.synthetic.main.add_new_refuel_layout.*
+import kotlinx.android.synthetic.main.row_layout.*
 import kotlinx.android.synthetic.main.show_all_layout.*
 import java.lang.Exception
 
@@ -22,23 +24,19 @@ import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
-    var databaseHandler : DBHelper = DBHelper(this,null)
+    val databaseHandler : DBHelper = DBHelper(this,null)
 
     lateinit var lstRefuel:List<Refuel>
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        lstRefuel=databaseHandler.getAllRefuel()
         setContentView(R.layout.activity_main)
-
-       lstRefuel=databaseHandler.getAllRefuel()
-
-
 
         //first visitibility
         visibilityInit()
 
+        Refreshdata()
 
         //add button
         val addButton: Button = findViewById(R.id.btn_add)
@@ -54,17 +52,48 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edit_fuelprice.text.toString()).toDouble()
             )
             databaseHandler.addRefuel(refuel)
+            Refreshdata()
 
 
-            findViewById<View>(R.id.addNewRefuelLayout).visibility = View.INVISIBLE
-            findViewById<View>(R.id.showAllRefuel).visibility = View.VISIBLE
+            //findViewById<View>(R.id.addNewRefuelLayout).visibility = View.INVISIBLE
+            //findViewById<View>(R.id.showAllRefuel).visibility = View.VISIBLE
         }
 
         //delete button
         val deleteButton: Button = findViewById(R.id.btn_Delete)
 
+        deleteButton.setOnClickListener {
+            val refuel = Refuel(
+                edit_Date.text.toString(),
+                edit_KilometerClock.text.toString().toDouble(),
+                edit_KilometersBetweenFillIngUpFuelTank.text.toString().toDouble(),
+                edit_fuelQuantity.text.toString().toDouble(),
+                edit_fuelprice.text.toString().toDouble(),
+                Integer.parseInt(txt_row_id.text.toString())
+
+
+            )
+            databaseHandler.delteRefuel(refuel)
+            Refreshdata()
+        }
+
         //update button
         val updateButton: Button = findViewById(R.id.btn_Update)
+
+        updateButton.setOnClickListener {
+            val refuel = Refuel(
+                edit_Date.text.toString(),
+                edit_KilometerClock.text.toString().toDouble(),
+                edit_KilometersBetweenFillIngUpFuelTank.text.toString().toDouble(),
+                edit_fuelQuantity.text.toString().toDouble(),
+                edit_fuelprice.text.toString().toDouble(),
+                Integer.parseInt(txt_row_id.text.toString())
+
+
+            )
+            showToast( databaseHandler.updateRefuel(refuel).toString())
+            Refreshdata()
+        }
 
         //Show all refuel
         val showAllRefuelButton:Button = findViewById(R.id.btn_showAll)
@@ -122,6 +151,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun Refreshdata() {
+        lstRefuel = databaseHandler.getAllRefuel()
+        val adapter = RefuelAdapter(this@MainActivity,lstRefuel,
+            edit_Date,edit_KilometerClock,edit_KilometersBetweenFillIngUpFuelTank,edit_fuelQuantity,edit_fuelprice,txt_row_id)
+        listViewShowAllRefuel.adapter = adapter
+    }
+
     fun dropTable(view:View)
     {
         databaseHandler.dropTable("Refuels")
@@ -153,5 +189,10 @@ class MainActivity : AppCompatActivity() {
     {
         findViewById<View>(R.id.addNewRefuelLayout).visibility = View.VISIBLE
         findViewById<View>(R.id.showAllRefuel).visibility = View.INVISIBLE
+    }
+
+    fun showToast(message:String)
+    {
+        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
     }
 }
