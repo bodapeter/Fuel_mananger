@@ -36,7 +36,15 @@ class MainActivity : AppCompatActivity() {
         //first visitibility
         visibilityInit()
 
-        Refreshdata()
+
+       // Refreshdata()
+
+
+        val rowbutton:Button =findViewById(R.id.row)
+
+        rowbutton.setOnClickListener()
+        { findViewById<View>(R.id.main_Layout).visibility = View.INVISIBLE
+            findViewById<View>(R.id.row_layout).visibility = View.VISIBLE  }
 
         //add button
         val addButton: Button = findViewById(R.id.btn_add)
@@ -52,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 Integer.parseInt(edit_fuelprice.text.toString()).toDouble()
             )
             databaseHandler.addRefuel(refuel)
-            Refreshdata()
+           // Refreshdata()
 
 
             //findViewById<View>(R.id.addNewRefuelLayout).visibility = View.INVISIBLE
@@ -74,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
             )
             databaseHandler.delteRefuel(refuel)
-            Refreshdata()
+            //Refreshdata()
         }
 
         //update button
@@ -92,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
             )
             showToast( databaseHandler.updateRefuel(refuel).toString())
-            Refreshdata()
+            //Refreshdata()
         }
 
         //Show all refuel
@@ -151,12 +159,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun Refreshdata() {
+    /*fun Refreshdata() {
         lstRefuel = databaseHandler.getAllRefuel()
         val adapter = RefuelAdapter(this@MainActivity,lstRefuel,
-            edit_Date,edit_KilometerClock,edit_KilometersBetweenFillIngUpFuelTank,edit_fuelQuantity,edit_fuelprice,txt_row_id)
+            showlayout_edit_date,showlayout_edit_kilometer,showlayout_edit_2refuel,showlayout_edit_fuelquantity,showlayout_edit_pricerefuel,txt_row_id)
         listViewShowAllRefuel.adapter = adapter
-    }
+    }*/
 
     fun dropTable(view:View)
     {
